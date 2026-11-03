@@ -73,7 +73,7 @@
 				</div>
 
 				<br /><br />
-				<button>Submit</button>
+				<button id="submit">Submit</button>
 			</article>
 
 			<article id="thank-you">
@@ -84,6 +84,16 @@
 			</article>
 		</main>
 
-		<script src="./script.js" defer></script>
+		<script src="./script.js" type="module" defer></script>
+		<script>
+			document.addEventListener('scroll', () => {
+				let max = this.visualViewport.width / 100;
+				let t = Math.max(0, Math.min(1, this.scrollY / 1000));
+
+				let currBlur = t * max;
+				document.querySelector('.bg-image').style.filter =
+					`blur(${currBlur.toFixed(0)}px)`;
+			});
+		</script>
 	</body>
 </html>
