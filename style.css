@@ -6,6 +6,7 @@
 
 * {
 	font-family: Arial, Helvetica, sans-serif;
+	overflow-x: hidden;
 }
 
 .title {
@@ -239,4 +240,62 @@ button {
 
 .salmon {
 	color: salmon;
+}
+
+#code {
+	font-size: 80px;
+}
+
+@media screen and (max-width: 800px) {
+	nav {
+		flex-direction: column;
+		background-color: black;
+		position: relative;
+	}
+
+	.bg-image {
+		object-fit: cover;
+		height: 110vh;
+	}
+
+	.form {
+		grid-template-columns: auto;
+		width: 100%;
+	}
+
+	#desc div {
+		width: 100%;
+		align-items: center;
+	}
+
+	#desc div .circle {
+		/* width: 30%; */
+		width: unset;
+		height: 50%;
+		aspect-ratio: 1;
+		padding: 20px;
+		margin: unset;
+		font-size: 15px;
+	}
+
+	.options {
+		width: 100%;
+	}
+
+	ul {
+		flex-direction: column;
+	}
+
+	.slogan {
+		font-size: 30px;
+		padding: 40px;
+	}
+
+	#desc-text {
+		font-size: 16px;
+	}
+
+	#code {
+		font-size: 40px;
+	}
 }

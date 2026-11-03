@@ -84,17 +84,46 @@
 				<h1 id="thank-you-text">Thank you for your time!</h1>
 				<h2 id="your-code">Your code:</h2>
 				<br />
-				<h1 style="font-size: 80px" id="code"></h1>
+				<h1 id="code"></h1>
 			</article>
 		</main>
 
 		<script src="./script.js" type="module" defer></script>
 		<script>
+			let deviceMultiplier = this.visualViewport.width < 900 ? 2 : 1;
+
+			if (deviceMultiplier == 2) {
+				const nav = document.querySelector('nav');
+
+				nav.style.overflow = 'hidden';
+				nav.style.height = '50px';
+				nav.style.zIndex = 100;
+
+				let collapsed = true;
+
+				document
+					.querySelector('#title')
+					.addEventListener('click', () => {
+						collapsed = !collapsed;
+
+						if (!collapsed) {
+							nav.style.overflow = 'unset';
+							nav.style.height = 'unset';
+						} else {
+							nav.style.overflow = 'hidden';
+							nav.style.height = '50px';
+						}
+					});
+			}
+
 			document.addEventListener('scroll', () => {
 				let max = this.visualViewport.width / 100;
-				let t = Math.max(0, Math.min(1, this.scrollY / 1000));
+				let t = Math.max(
+					0,
+					Math.min(1, (this.scrollY / 1000) * deviceMultiplier),
+				);
 
-				let currBlur = t * max;
+				let currBlur = t * max * deviceMultiplier;
 				document.querySelector('.bg-image').style.filter =
 					`blur(${currBlur.toFixed(0)}px)`;
 			});
