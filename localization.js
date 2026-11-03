@@ -19,6 +19,10 @@ export const localizationEn = {
 	submit: 'Submit',
 	'thank-you-text': 'Thank you for your time!',
 	'your-code': 'Your code:',
+	'enter-code': 'Enter code:',
+	'compare-with-a-friend': 'Compare with a friend',
+	'compare-btn': 'Compare',
+	'you-have-a': 'Your tastes have a similarity of:',
 };
 
 export const localizationBg = {
@@ -42,4 +46,33 @@ export const localizationBg = {
 	submit: 'Изпратете',
 	'thank-you-text': 'Благодарим за отделеното време!',
 	'your-code': 'Вашият код:',
+	'enter-code': 'Въведете код:',
+	'compare-with-a-friend': 'Сравнете с приятел',
+	'compare-btn': 'Сравнете',
+	'you-have-a': 'Имате сходство на вкуса:',
 };
+
+export function loadStrings(localization) {
+	for (let key in localization) {
+		if (document.getElementById(key))
+			document.getElementById(key).innerHTML = localization[key];
+	}
+}
+
+export function useLocalization() {
+	document.querySelector('#bg-button').addEventListener('click', (e) => {
+		loadStrings(localizationBg);
+
+		e.currentTarget.classList.add('salmon');
+		document.querySelector('#en-button').classList.remove('salmon');
+	});
+
+	document.querySelector('#en-button').addEventListener('click', (e) => {
+		loadStrings(localizationEn);
+
+		e.currentTarget.classList.add('salmon');
+		document.querySelector('#bg-button').classList.remove('salmon');
+	});
+
+	loadStrings(localizationBg);
+}

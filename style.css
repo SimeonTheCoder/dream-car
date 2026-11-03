@@ -246,6 +246,15 @@ button {
 	font-size: 80px;
 }
 
+#similarity {
+	font-size: 80px;
+}
+
+a {
+	color: unset;
+	text-decoration: none;
+}
+
 @media screen and (max-width: 800px) {
 	nav {
 		flex-direction: column;
@@ -296,6 +305,10 @@ button {
 	}
 
 	#code {
+		font-size: 40px;
+	}
+
+	#similarity {
 		font-size: 40px;
 	}
 }

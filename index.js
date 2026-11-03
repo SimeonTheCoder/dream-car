@@ -1,46 +1,30 @@
 import { questionTreeBg, questionTreeEn } from './questions.js';
-import { localizationBg, localizationEn } from './localization.js';
+import {
+	localizationBg,
+	localizationEn,
+	loadStrings,
+	useLocalization,
+} from './localization.js';
 import { encode, decode } from './base64.js';
 
-let localization = localizationBg;
 let questionTree = questionTreeBg;
 
-loadStrings();
+useLocalization();
+
 let questionsFlat = flattenTree();
-
-function loadStrings() {
-	console.log(localization);
-
-	for (let key in localization) {
-		console.log(key);
-		document.getElementById(key).innerHTML = localization[key];
-	}
-}
 
 document.querySelector('#bg-button').addEventListener('click', (e) => {
 	questionTree = questionTreeBg;
-	localization = localizationBg;
-
 	questionsFlat = flattenTree();
 
-	loadStrings();
 	renderQuestion();
-
-	e.currentTarget.classList.add('salmon');
-	document.querySelector('#en-button').classList.remove('salmon');
 });
 
 document.querySelector('#en-button').addEventListener('click', (e) => {
 	questionTree = questionTreeEn;
-	localization = localizationEn;
-
 	questionsFlat = flattenTree();
 
-	loadStrings();
 	renderQuestion();
-
-	e.currentTarget.classList.add('salmon');
-	document.querySelector('#bg-button').classList.remove('salmon');
 });
 
 document.querySelector('#extra').style.display = 'none';
@@ -152,5 +136,6 @@ document.querySelector('#submit').addEventListener('click', () => {
 	document.querySelector('#thank-you').style.display = 'unset';
 	document.querySelector('#code').innerText = code;
 
+	localStorage.setItem('code', code);
 	console.log(data);
 });
