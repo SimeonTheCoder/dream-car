@@ -29,10 +29,58 @@
 				Your dream car,<br />if money wasn't a problem!
 			</h1>
 
+			<div id="desc">
+				Answer the questions below to find your dream car.
+				<br />
+				Every question can be answered using the following:
+
+				<br />
+				<br />
+
+				<div style="display: flex; justify-content: space-around">
+					<span class="circle darkred">No</span>
+					<span class="circle red">Maybe not</span>
+					<span class="circle gray">Unsure</span>
+					<span class="circle green">Maybe</span>
+					<span class="circle darkgreen">Yes</span>
+				</div>
+			</div>
+
 			<article>
-				<section id="body-type">
-					<h1>Body Type</h1>
-				</section>
+				<div class="questions"></div>
+			</article>
+
+			<article id="extra">
+				<h1>A few more questions</h1>
+
+				<div class="form">
+					<label for="age">What's your age?</label
+					><input
+						name="age"
+						type="number"
+						min="0"
+						max="123"
+						required
+						value="18"
+					/>
+
+					<label for="gender">What's your gender?</label>
+					<select name="gender" required>
+						<option>Male</option>
+						<option>Female</option>
+						<option>Other / prefer not to say</option>
+					</select>
+				</div>
+
+				<br /><br />
+				<button>Submit</button>
+			</article>
+
+			<article id="thank-you">
+				<h1>Thank you for your time!</h1>
+				<h2>Your code:</h2>
+				<br />
+				<h1 style="font-size: 80px" id="code"></h1>
 			</article>
 		</main>
 
