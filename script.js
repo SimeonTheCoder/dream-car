@@ -1,17 +1,63 @@
-import { questionTree } from './questions.js';
+import { questionTreeBg, questionTreeEn } from './questions.js';
+import { localizationBg, localizationEn } from './localization.js';
 import { encode, decode } from './base64.js';
+
+let localization = localizationBg;
+let questionTree = questionTreeBg;
+
+loadStrings();
+let questionsFlat = flattenTree();
+
+function loadStrings() {
+	console.log(localization);
+
+	for (let key in localization) {
+		console.log(key);
+		document.getElementById(key).innerHTML = localization[key];
+	}
+}
+
+document.querySelector('#bg-button').addEventListener('click', (e) => {
+	questionTree = questionTreeBg;
+	localization = localizationBg;
+
+	questionsFlat = flattenTree();
+
+	loadStrings();
+	renderQuestion();
+
+	e.currentTarget.classList.add('salmon');
+	document.querySelector('#en-button').classList.remove('salmon');
+});
+
+document.querySelector('#en-button').addEventListener('click', (e) => {
+	questionTree = questionTreeEn;
+	localization = localizationEn;
+
+	questionsFlat = flattenTree();
+
+	loadStrings();
+	renderQuestion();
+
+	e.currentTarget.classList.add('salmon');
+	document.querySelector('#bg-button').classList.remove('salmon');
+});
 
 document.querySelector('#extra').style.display = 'none';
 document.querySelector('#thank-you').style.display = 'none';
 
-const questionsFlat = [];
+function flattenTree() {
+	const flat = [];
 
-for (let topic of Object.keys(questionTree)) {
-	for (let currQuestion of questionTree[topic].options) {
-		questionsFlat.push({
-			str: questionTree[topic].header + currQuestion,
-		});
+	for (let topic of Object.keys(questionTree)) {
+		for (let currQuestion of questionTree[topic].options) {
+			flat.push({
+				str: questionTree[topic].header + currQuestion,
+			});
+		}
 	}
+
+	return flat;
 }
 
 const answers = [];
@@ -38,7 +84,9 @@ function renderQuestion() {
 		return;
 	}
 
-	questionStr.textContent = questionsFlat[questionIndex].str;
+	questionStr.textContent =
+		questionsFlat[questionIndex].str +
+		` (${questionIndex}/${questionsFlat.length})`;
 
 	questionContainer.appendChild(questionStr);
 

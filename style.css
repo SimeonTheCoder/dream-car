@@ -75,6 +75,13 @@ ul {
 
 nav ul li {
 	list-style: none;
+	cursor: pointer;
+}
+
+nav ul li:hover {
+	color: orange;
+	text-decoration: underline;
+	transition: all 0.2s;
 }
 
 main {
@@ -218,4 +225,18 @@ button {
 	color: white;
 	font-size: 20px;
 	border-radius: 20px;
+}
+
+#bg-button {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#en-button {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.salmon {
+	color: salmon;
 }
