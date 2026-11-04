@@ -2,6 +2,7 @@ import { questionTreeBg, questionTreeEn } from './questions.js';
 import { useLocalization } from './localization.js';
 import { encode, decode } from './base64.js';
 import { convertToVector, dot } from './vector-math.js';
+import { submit } from './firebase.js';
 
 let questionTree = questionTreeBg;
 
@@ -131,6 +132,8 @@ document.querySelector('#submit').addEventListener('click', async () => {
 	localStorage.setItem('code', code);
 	console.log(data);
 
+	submit(data);
+
 	const asVector = convertToVector(answers);
 	findClosestMatch(asVector);
 });
@@ -164,8 +167,6 @@ async function renderCar(car, stats, img) {
 }
 
 async function findClosestMatch(asVector) {
-	console.log(asVector);
-
 	const carDb = await fetch('./db.json').then((r) => r.json());
 
 	let closestMatchingCar = [];
