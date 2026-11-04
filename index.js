@@ -139,24 +139,30 @@ document.querySelector('#submit').addEventListener('click', async () => {
 	findClosestMatch(asVector);
 });
 
-async function renderCar(car, stats) {
+async function renderCar(car, stats, img) {
 	const card = document.createElement('article');
+	card.classList.add('car-preview');
+
+	const div1 = document.createElement('div');
+	div1.classList.add('car-desc');
+	const div2 = document.createElement('div');
 
 	const title = document.createElement('h1');
 	title.innerText = car;
-	title.style.textDecoration = 'underline';
-	title.addEventListener('click', () => {
-		window.open(
-			`https://www.google.com/search?hl=en&q=${encodeURIComponent(car)}`,
-		);
-	});
-	title.style.cursor = 'pointer';
 
 	const desc = document.createElement('h2');
 	desc.innerHTML = `${stats.hp} hp<br>${stats.top_speed} km/h<br>${stats.acceleration}s 0-100km/h<br>${stats.engine_type}`;
 
-	card.appendChild(title);
-	card.appendChild(desc);
+	const image = document.createElement('img');
+	image.src = `https://avatars.mds.yandex.net/i?id=${img}-images-thumbs&n=13`;
+
+	div1.appendChild(title);
+	div1.appendChild(desc);
+
+	div2.appendChild(image);
+
+	card.appendChild(div1);
+	card.appendChild(div2);
 
 	document.querySelector('main').appendChild(card);
 }
@@ -184,6 +190,7 @@ async function findClosestMatch(asVector) {
 		await renderCar(
 			closestMatchingCar[i],
 			carDb[closestMatchingCar[i]].stats,
+			carDb[closestMatchingCar[i]].image,
 		);
 	}
 }
