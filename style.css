@@ -274,6 +274,11 @@ a {
 	height: 100%;
 	object-fit: cover;
 	border-radius: 20px;
+	overflow: hidden;
+}
+
+.car-preview div {
+	overflow: hidden;
 }
 
 .car-desc {
@@ -345,5 +350,15 @@ a {
 
 	#similarity {
 		font-size: 40px;
+	}
+
+	.car-preview {
+		width: 100%;
+		flex-direction: column-reverse;
+	}
+
+	.car-desc h1,
+	h2 {
+		font-size: 20px;
 	}
 }

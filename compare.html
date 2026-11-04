@@ -75,19 +75,17 @@
 
 				let collapsed = true;
 
-				document
-					.querySelector('#title')
-					.addEventListener('click', () => {
-						collapsed = !collapsed;
+				document.querySelector('nav').addEventListener('click', () => {
+					collapsed = !collapsed;
 
-						if (!collapsed) {
-							nav.style.overflow = 'unset';
-							nav.style.height = 'unset';
-						} else {
-							nav.style.overflow = 'hidden';
-							nav.style.height = '50px';
-						}
-					});
+					if (!collapsed) {
+						nav.style.overflow = 'unset';
+						nav.style.height = 'unset';
+					} else {
+						nav.style.overflow = 'hidden';
+						nav.style.height = '50px';
+					}
+				});
 			}
 		</script>
 	</body>

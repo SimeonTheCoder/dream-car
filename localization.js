@@ -71,6 +71,7 @@ export function useLocalization() {
 
 		e.currentTarget.classList.add('salmon');
 		document.querySelector('#en-button').classList.remove('salmon');
+		localStorage.setItem('language', 'bg');
 	});
 
 	document.querySelector('#en-button').addEventListener('click', (e) => {
@@ -78,7 +79,12 @@ export function useLocalization() {
 
 		e.currentTarget.classList.add('salmon');
 		document.querySelector('#bg-button').classList.remove('salmon');
+		localStorage.setItem('language', 'en');
 	});
 
-	loadStrings(localizationBg);
+	loadStrings(
+		localStorage.getItem('language') == 'en'
+			? localizationEn
+			: localizationBg,
+	);
 }
