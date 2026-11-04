@@ -1,11 +1,7 @@
 import { questionTreeBg, questionTreeEn } from './questions.js';
-import {
-	localizationBg,
-	localizationEn,
-	loadStrings,
-	useLocalization,
-} from './localization.js';
+import { useLocalization } from './localization.js';
 import { encode, decode } from './base64.js';
+import { convertToVector, dot } from './vector-math.js';
 
 let questionTree = questionTreeBg;
 
@@ -123,7 +119,7 @@ function renderQuestion() {
 
 renderQuestion();
 
-document.querySelector('#submit').addEventListener('click', () => {
+document.querySelector('#submit').addEventListener('click', async () => {
 	const code = encode(answers);
 
 	const data = {
@@ -138,4 +134,59 @@ document.querySelector('#submit').addEventListener('click', () => {
 
 	localStorage.setItem('code', code);
 	console.log(data);
+
+	const asVector = convertToVector(answers);
+	findClosestMatch(asVector);
 });
+
+async function renderCar(car, stats) {
+	const card = document.createElement('article');
+
+	const title = document.createElement('h1');
+	title.innerText = car;
+	title.style.textDecoration = 'underline';
+	title.addEventListener('click', () => {
+		window.open(
+			`https://www.google.com/search?hl=en&q=${encodeURIComponent(car)}`,
+		);
+	});
+	title.style.cursor = 'pointer';
+
+	const desc = document.createElement('h2');
+	desc.innerHTML = `${stats.hp} hp<br>${stats.top_speed} km/h<br>${stats.acceleration}s 0-100km/h<br>${stats.engine_type}`;
+
+	card.appendChild(title);
+	card.appendChild(desc);
+
+	document.querySelector('main').appendChild(card);
+}
+
+async function findClosestMatch(asVector) {
+	console.log(asVector);
+
+	const carDb = await fetch('./db.json').then((r) => r.json());
+
+	let closestMatchingCar = [];
+	let closestMatch = -1;
+
+	for (let car in carDb) {
+		const currMatch = dot(carDb[car].vector, asVector);
+
+		if (currMatch > closestMatch) {
+			closestMatchingCar.splice(0, 0, car);
+			closestMatch = currMatch;
+
+			if (closestMatchingCar.length > 10) closestMatchingCar.pop();
+		}
+	}
+
+	for (let i = 0; i < 5; i++) {
+		await renderCar(
+			closestMatchingCar[i],
+			carDb[closestMatchingCar[i]].stats,
+		);
+	}
+}
+
+if (localStorage.getItem('code'))
+	findClosestMatch(convertToVector(decode(localStorage.getItem('code'))));

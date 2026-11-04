@@ -2,26 +2,10 @@ const base64 =
 	'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
 export function encode(answers) {
-	let bin = 0;
-	let counter = 0;
-
 	let str = '';
 
-	for (let i = answers.length - 1; i > -1; i--) {
-		bin += answers[i];
-		counter++;
-
-		if (counter == 2) {
-			counter = 0;
-			str = base64[bin] + str;
-			bin = 0;
-		}
-
-		bin *= 8;
-	}
-
-	if (counter == 1) {
-		str = base64[bin] + str;
+	for (let i = 0; i < answers.length; i += 2) {
+		str += base64[answers[i] * 8 + answers[i + 1]];
 	}
 
 	return str;
