@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dream Car Search Engine</title>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<img
+			class="bg-image"
+			src="https://external-content.duckduckgo.com/iu/?u=https://images.wallpapersden.com/image/download/4k-empty-road-new_bGdlaGiUmZqaraWkpJRobWllrWdma2U.jpg"
+		/>
+		<nav>
+			<ul>
+				<li class="title">
+					<a href="./index.html" id="title">Your Dream Car</a>
+				</li>
+				<li>
+					<a href="./test.html" id="take-the-test">Take the Test</a>
+				</li>
+				<li>
+					<a href="./compare.html" id="compare"
+						>Compare with Others</a
+					>
+				</li>
+				<li id="global-stats">Global Stats</li>
+				<li>
+					<a id="bg-button">BG</a>
+					|
+					<a id="en-button">EN</a>
+				</li>
+			</ul>
+		</nav>
+		<main style="margin-top: 17%">
+			<div id="desc">
+				<span id="desc-text">
+					Answer the questions below to find your dream car.
+					<br />
+					Every question can be answered using the following:
+				</span>
+
+				<br />
+				<br />
+
+				<div style="display: flex; justify-content: space-around">
+					<span class="circle darkred" id="no-circle">No</span>
+					<span class="circle red" id="maybe-not-circle"
+						>Maybe not</span
+					>
+					<span class="circle gray" id="unsure-circle">Unsure</span>
+					<span class="circle green" id="maybe-circle">Maybe</span>
+					<span class="circle darkgreen" id="yes-circle">Yes</span>
+				</div>
+
+				<br />
+
+				<button
+					style="font-size: 30px"
+					onclick="
+						document.getElementById('desc').style.display = 'none';
+						document.getElementById(
+							'questions-article',
+						).style.display = 'unset';
+					"
+					id="continue"
+				>
+					Continue
+				</button>
+			</div>
+
+			<article id="questions-article">
+				<div class="questions"></div>
+			</article>
+
+			<article id="extra">
+				<h1 id="a-few-more-questions">A few more questions</h1>
+
+				<div class="form">
+					<label for="age" id="age">What's your age?</label
+					><input
+						name="age"
+						type="number"
+						min="0"
+						max="123"
+						required
+						value="18"
+					/>
+
+					<label for="gender" id="gender">What's your gender?</label>
+					<select name="gender" required>
+						<option>Male</option>
+						<option>Female</option>
+						<option>Other / prefer not to say</option>
+					</select>
+				</div>
+
+				<br /><br />
+				<button id="submit">Submit</button>
+			</article>
+
+			<article id="thank-you">
+				<h1 id="thank-you-text">Thank you for your time!</h1>
+				<h2 id="your-code">Your code:</h2>
+				<br />
+				<h1 id="code"></h1>
+				<button
+					id="take-the-test-again"
+					onclick="
+						localStorage.removeItem('code');
+						document.location.href = '/test.html';
+					"
+				>
+					Take the test again
+				</button>
+			</article>
+		</main>
+
+		<script src="./test.js" type="module" defer></script>
+		<script>
+			document.getElementById('questions-article').style.display = 'none';
+
+			document.querySelector('#extra').style.display = 'none';
+			document.querySelector('#thank-you').style.display = 'none';
+
+			if (localStorage.getItem('code')) {
+				document.getElementById('thank-you').style.display = 'unset';
+				document.querySelector('#code').innerText =
+					localStorage.getItem('code');
+				document.getElementById('desc').style.display = 'none';
+			}
+
+			let deviceMultiplier = this.visualViewport.width < 900 ? 2 : 1;
+
+			if (deviceMultiplier == 2) {
+				const nav = document.querySelector('nav');
+
+				nav.style.overflow = 'hidden';
+				nav.style.height = '50px';
+				nav.style.zIndex = 100;
+
+				let collapsed = true;
+
+				document
+					.querySelector('#title')
+					.addEventListener('click', () => {
+						collapsed = !collapsed;
+
+						if (!collapsed) {
+							nav.style.overflow = 'unset';
+							nav.style.height = 'unset';
+						} else {
+							nav.style.overflow = 'hidden';
+							nav.style.height = '50px';
+						}
+					});
+			}
+
+			let timer = 0;
+
+			setInterval(() => {
+				let max = this.visualViewport.width / 100;
+				let t = Math.max(
+					0,
+					Math.min(1, (timer / 100) * deviceMultiplier),
+				);
+
+				let currBlur = t * max * deviceMultiplier;
+				document.querySelector('.bg-image').style.filter =
+					`blur(${currBlur.toFixed(0)}px)`;
+
+				timer++;
+			}, 10);
+		</script>
+	</body>
+</html>

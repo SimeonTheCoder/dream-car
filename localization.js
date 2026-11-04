@@ -19,10 +19,13 @@ export const localizationEn = {
 	submit: 'Submit',
 	'thank-you-text': 'Thank you for your time!',
 	'your-code': 'Your code:',
-	'enter-code': 'Enter code:',
+	'enter-code': 'Enter codes:',
 	'compare-with-a-friend': 'Compare with a friend',
 	'compare-btn': 'Compare',
 	'you-have-a': 'Your tastes have a similarity of:',
+	'continue-to-the-test': 'Take the test',
+	continue: 'Continue',
+	'take-the-test-again': 'Take the test again',
 };
 
 export const localizationBg = {
@@ -46,10 +49,13 @@ export const localizationBg = {
 	submit: 'Изпратете',
 	'thank-you-text': 'Благодарим за отделеното време!',
 	'your-code': 'Вашият код:',
-	'enter-code': 'Въведете код:',
+	'enter-code': 'Въведете кодове:',
 	'compare-with-a-friend': 'Сравнете с приятел',
 	'compare-btn': 'Сравнете',
 	'you-have-a': 'Имате сходство на вкуса:',
+	'continue-to-the-test': 'Започнете теста',
+	continue: 'Продължете',
+	'take-the-test-again': 'Направете теста отново',
 };
 
 export function loadStrings(localization) {

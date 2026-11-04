@@ -23,9 +23,6 @@ document.querySelector('#en-button').addEventListener('click', (e) => {
 	renderQuestion();
 });
 
-document.querySelector('#extra').style.display = 'none';
-document.querySelector('#thank-you').style.display = 'none';
-
 function flattenTree() {
 	const flat = [];
 
@@ -89,10 +86,8 @@ function renderQuestion() {
 			answers.push(j);
 			e.currentTarget.classList.add('pressed');
 
-			setTimeout(() => {
-				questionIndex++;
-				renderQuestion();
-			}, 200);
+			questionIndex++;
+			renderQuestion();
 		};
 
 		optionsDiv.appendChild(currCircle);
@@ -121,6 +116,7 @@ renderQuestion();
 
 document.querySelector('#submit').addEventListener('click', async () => {
 	const code = encode(answers);
+	console.log(answers);
 
 	const data = {
 		questions: code,

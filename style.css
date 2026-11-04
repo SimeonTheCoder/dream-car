@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
 :root {
 	--bg: rgba(255, 255, 255, 0.5);
 	--fg: black;
@@ -5,7 +7,8 @@
 }
 
 * {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	overflow-x: hidden;
 }
 
@@ -22,6 +25,10 @@
 	left: -2vw;
 
 	z-index: -10;
+}
+
+h2 {
+	font-size: 35px;
 }
 
 body {
@@ -160,7 +167,7 @@ article {
 	margin-top: 2%;
 	margin-bottom: 2%;
 
-	width: 30%;
+	width: 70%;
 }
 
 .darkgreen {
@@ -272,6 +279,15 @@ a {
 .car-desc {
 	padding: 40px;
 	padding-left: 80px;
+}
+
+.car-desc h2 {
+	font-weight: 100;
+}
+
+.car-desc h1 {
+	font-size: 40px;
+	font-weight: 900;
 }
 
 @media screen and (max-width: 800px) {
