@@ -39,6 +39,7 @@ function flattenTree() {
 }
 
 const answers = [];
+for (let i = 0; i < 20; i++) answers.push(2);
 
 const colors = ['darkred', 'red', 'gray', 'green', 'darkgreen'];
 
@@ -84,7 +85,7 @@ function renderQuestion() {
 					.classList.remove('pressed');
 			}
 
-			answers.push(j);
+			answers[questionIndex] = j;
 			e.currentTarget.classList.add('pressed');
 
 			questionIndex++;
@@ -100,8 +101,6 @@ function renderQuestion() {
 	backButton.innerText = 'Back';
 
 	backButton.addEventListener('click', () => {
-		if (answers.length > questionIndex) answers.pop();
-
 		questionIndex--;
 		if (questionIndex < 0) questionIndex = 0;
 
